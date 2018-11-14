@@ -11,10 +11,10 @@ double calcita[50][50];
 double pos_varilla[50][50];
 
 void varilla(int lon ,double diam);
-void cond_ini_1(double lon, double t_tot, double dt);
+void cond_ini_1(int lon, double t_tot, double dt);
 
 int main(){
- double lon=50;
+ int lon=50;
  double diam=10;
  varilla(lon,diam);
 
@@ -36,7 +36,7 @@ int main(){
 
 
 
-void varilla(double lon ,double diam){
+void varilla(int lon ,double diam){
  for( int x=0;x<lon;x++){
   for ( int y=0;y<lon;y++){
    if( ((x-lon/2)*(x-lon/2)+(y-lon/2)*(y-lon/2))<diam*diam/4){
@@ -47,7 +47,7 @@ void varilla(double lon ,double diam){
  }
 }
 
-void cond_ini_1(double lon, double t_tot, double dt){
+void cond_ini_1(int lon, double t_tot, double dt){
  double T_front=10;
  for(int i=0;i<lon;i++){
  calcita[0][i]=T_front;
@@ -56,7 +56,7 @@ void cond_ini_1(double lon, double t_tot, double dt){
  calcita[i][lon-1]=T_front;
  }
  if(dt==0){dt=1;} 
- pasos_tiempo=t_tot/dt;
+ double pasos_tiempo=t_tot/dt;
  double calcita_nuevo[50][50];
  for(int t=0;t<pasos_tiempo;t++){
  
