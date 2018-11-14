@@ -34,9 +34,27 @@ fig.savefig('grados.jpg');
 
 
 datos=np.genfromtxt(sys.argv[3]);
-fig=plt.figure()
-ax = fig.gca(projection='3d');
-ax.scatter(datos[:,0],datos[:,1],datos[:,2])
+n=50**2;
+fig = plt.figure()
+
+ax = fig.add_subplot(2, 2, 1, projection='3d');
+scat=ax.scatter(datos[:n,0],datos[:n,1],datos[:n,2],s=2, c=datos[:n,2],vmin=10,vmax=100)
+fig.colorbar(scat, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 2, projection='3d');
+scat2=ax.scatter(datos[n:2*n,0],datos[n:2*n,1],datos[n:2*n,2],s=2, c=datos[n:2*n,2],vmin=10,vmax=100)
+fig.colorbar(scat2, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 3, projection='3d');
+scat3=ax.scatter(datos[2*n:3*n,0],datos[2*n:3*n,1],datos[2*n:3*n,2],s=2, c=datos[2*n:3*n,2],vmin=10,vmax=100)
+fig.colorbar(scat3, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 4, projection='3d');
+scat4=ax.scatter(datos[3*n:4*n,0],datos[3*n:4*n,1],datos[3*n:4*n,2],s=2, c=datos[3*n:4*n,2],vmin=10,vmax=100)
+fig.colorbar(scat4, ticks=np.arange(10,110,10))
+
+
+
 plt.show()
 
 
