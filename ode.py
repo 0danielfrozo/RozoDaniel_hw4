@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt 
 import sys
+from mpl_toolkits.mplot3d import Axes3D
 
 datos=np.genfromtxt(sys.argv[1]);
 
@@ -30,6 +31,13 @@ plt.ylim(ymin = 0,ymax = 5000)
 plt.xlim(xmin=0,xmax = 10000)
 plt.legend()
 fig.savefig('grados.jpg');
+
+
+datos=np.genfromtxt(sys.argv[3]);
+fig=plt.figure()
+ax = fig.gca(projection='3d');
+ax.scatter(datos[:,0],datos[:,1],datos[:,2])
+plt.show()
 
 
 
