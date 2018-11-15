@@ -44,17 +44,17 @@ fig.colorbar(scat, ticks=np.arange(10,110,10))
 
 ax = fig.add_subplot(2, 2, 2, projection='3d');
 scat2=ax.scatter(datos[n:2*n,0],datos[n:2*n,1],datos[n:2*n,2],s=2, c=datos[n:2*n,2],vmin=10,vmax=100)
-ax.set_title('t=1s')
+ax.set_title('t=5s')
 fig.colorbar(scat2, ticks=np.arange(10,110,10))
 
 ax = fig.add_subplot(2, 2, 3, projection='3d');
 scat3=ax.scatter(datos[2*n:3*n,0],datos[2*n:3*n,1],datos[2*n:3*n,2],s=2, c=datos[2*n:3*n,2],vmin=10,vmax=100)
-ax.set_title('t=3s')
+ax.set_title('t=10s')
 fig.colorbar(scat3, ticks=np.arange(10,110,10))
 
 ax = fig.add_subplot(2, 2, 4, projection='3d');
 scat4=ax.scatter(datos[3*n:4*n,0],datos[3*n:4*n,1],datos[3*n:4*n,2],s=2, c=datos[3*n:4*n,2],vmin=10,vmax=100)
-ax.set_title('t=5s')
+ax.set_title('t=inf')
 fig.colorbar(scat4, ticks=np.arange(10,110,10))
 
 fig.savefig('cond_1.jpg');
@@ -71,7 +71,7 @@ fig.colorbar(scat, ticks=np.arange(10,110,10))
 
 ax = fig.add_subplot(2, 2, 2, projection='3d');
 scat2=ax.scatter(datos[n:2*n,0],datos[n:2*n,1],datos[n:2*n,2],s=2, c=datos[n:2*n,2],vmin=10,vmax=100)
-ax.set_title('t=50s')
+ax.set_title('t=10s')
 ax.set_zlim(zmin=0,zmax = 100)
 fig.colorbar(scat2, ticks=np.arange(10,110,10))
 
@@ -88,6 +88,37 @@ ax.set_zlim(zmin=0,zmax = 100)
 fig.colorbar(scat4, ticks=np.arange(10,110,10))
 
 fig.savefig('cond_3.jpg');
+
+
+
+datos=np.genfromtxt(sys.argv[5]);
+n=50**2;
+fig = plt.figure()
+
+ax = fig.add_subplot(2, 2, 1, projection='3d');
+scat=ax.scatter(datos[:n,0],datos[:n,1],datos[:n,2],s=2, c=datos[:n,2],vmin=10,vmax=100)
+ax.set_title('t=0s')
+fig.colorbar(scat, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 2, projection='3d');
+scat2=ax.scatter(datos[n:2*n,0],datos[n:2*n,1],datos[n:2*n,2],s=2, c=datos[n:2*n,2],vmin=10,vmax=100)
+ax.set_title('t=10s')
+ax.set_zlim(zmin=0,zmax = 100)
+fig.colorbar(scat2, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 3, projection='3d');
+scat3=ax.scatter(datos[2*n:3*n,0],datos[2*n:3*n,1],datos[2*n:3*n,2],s=2, c=datos[2*n:3*n,2],vmin=10,vmax=100)
+ax.set_title('t=100s')
+ax.set_zlim(zmin=0,zmax = 100)
+fig.colorbar(scat3, ticks=np.arange(10,110,10))
+
+ax = fig.add_subplot(2, 2, 4, projection='3d');
+scat4=ax.scatter(datos[3*n:4*n,0],datos[3*n:4*n,1],datos[3*n:4*n,2],s=2, c=datos[3*n:4*n,2],vmin=10,vmax=100)
+ax.set_title('t=inf')
+ax.set_zlim(zmin=0,zmax = 100)
+fig.colorbar(scat4, ticks=np.arange(10,110,10))
+
+fig.savefig('cond_2.jpg');
 
 
 
