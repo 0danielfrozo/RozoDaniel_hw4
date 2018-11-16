@@ -13,6 +13,8 @@ ofstream datos;
 
 double calcita[50][50];
 double pos_varilla[50][50];
+double *promedio;
+
 
 void impresion();
 void varilla(int lon ,double diam);
@@ -40,7 +42,11 @@ int main(){
  impresion();
  
  datos.close();
-
+ datos.open("prom_1.txt");
+ for(int i =0; i<50/0.005;i++){
+  datos <<i*0.005<<" "<< promedio[i]<<endl;
+ }
+ datos.close();
   
  datos.open("con_2.txt");
  
@@ -59,6 +65,11 @@ int main(){
  
  datos.close();
  
+ datos.open("prom_2.txt");
+ for(int i =0; i<350/0.005;i++){
+  datos <<i*0.005<<" "<< promedio[i]<<endl;
+ }
+ datos.close();
  
  datos.open("con_3.txt");
 
@@ -75,6 +86,12 @@ int main(){
  cond_ini_3(lon,350,0.005);
  impresion();
  
+ datos.close();
+ 
+  datos.open("prom_3.txt");
+ for(int i =0; i<350/0.005;i++){
+  datos <<i*0.005<<" "<< promedio[i]<<endl;
+ }
  datos.close();
 
  return 0;
@@ -105,6 +122,7 @@ void varilla(int lon ,double diam){
 }
 
 void cond_ini_1(int lon, double t_tot, double dt){
+ 
  double T_front=10;
  double h=0.01;
  double nu=k/(rho*Cp);
@@ -116,9 +134,11 @@ void cond_ini_1(int lon, double t_tot, double dt){
  }
 
  if(dt==0){dt=1;} 
- double pasos_tiempo=t_tot/dt;
+ int pasos_tiempo=t_tot/dt;
+ promedio=new double[pasos_tiempo];
  double calcita_nuevo[50][50];
  for(int t=0;t<pasos_tiempo;t++){
+  double sum=0;
   for(int x=1;x<lon-1;x++){
    for (int y=1;y<lon-1;y++){
     if(pos_varilla[x][y]!=1){
@@ -132,8 +152,10 @@ void cond_ini_1(int lon, double t_tot, double dt){
   for( int x=1;x<lon-1;x++){
    for ( int y=1;y<lon-1;y++){
     calcita[x][y]=calcita_nuevo[x][y];
+    sum+=calcita_nuevo[x][y];
    }
   }
+  promedio[t]=sum/(50*50);
  }
 }
 
@@ -144,12 +166,14 @@ void cond_ini_2(int lon, double t_tot, double dt){
  double nu=k/(rho*Cp);
  
  if(dt==0){dt=1;} 
- double pasos_tiempo=t_tot/dt;
+ int pasos_tiempo=t_tot/dt;
+ promedio=new double[pasos_tiempo];
  double calcita_nuevo[50][50];
  for(int t=0;t<pasos_tiempo;t++){
+  double sum=0;
   for(int x=1;x<lon-1;x++){
    for (int y=1;y<lon-1;y++){
-    if(pos_varilla[x][y]!=1){
+       if(pos_varilla[x][y]!=1){
      calcita_nuevo[x][y]=calcita[x][y]+(dt*nu/(h*h))*((calcita[x+1][y]-2*calcita[x][y]+calcita[x-1][y])+(calcita[x][y+1]-2*calcita[x][y]+calcita[x][y-1]));
     }
     else{
@@ -178,8 +202,10 @@ void cond_ini_2(int lon, double t_tot, double dt){
   for( int x=0;x<lon;x++){
    for ( int y=0;y<lon;y++){
     calcita[x][y]=calcita_nuevo[x][y];
+    sum+=calcita_nuevo[x][y];
    }
   }
+ promedio[t]=sum/(50*50);
  }
 }
 
@@ -190,9 +216,11 @@ void cond_ini_3(int lon, double t_tot, double dt){
  double nu=k/(rho*Cp);
  
  if(dt==0){dt=1;} 
- double pasos_tiempo=t_tot/dt;
+ int pasos_tiempo=t_tot/dt;
+ promedio=new double[pasos_tiempo];
  double calcita_nuevo[50][50];
  for(int t=0;t<pasos_tiempo;t++){
+  double sum=0;
   for(int x=1;x<lon-1;x++){
    for (int y=1;y<lon-1;y++){
     if(pos_varilla[x][y]!=1){
@@ -224,8 +252,10 @@ void cond_ini_3(int lon, double t_tot, double dt){
   for( int x=0;x<lon;x++){
    for ( int y=0;y<lon;y++){
     calcita[x][y]=calcita_nuevo[x][y];
+    sum+=calcita_nuevo[x][y];
    }
   }
+ promedio[t]=sum/(50*50);
  }
 }
 

@@ -121,6 +121,28 @@ fig.colorbar(scat4, ticks=np.arange(10,110,10))
 fig.savefig('cond_2.jpg');
 
 
+datos=np.genfromtxt(sys.argv[6]);
+fig=plt.figure()
+plt.plot(datos[:,0],datos[:,1]);
+plt.ylabel('Temperatura Promedio [C]')
+plt.xlabel('Tiempo [s]')
+fig.savefig('promedio_1.jpg');
+
+datos=np.genfromtxt(sys.argv[7]);
+fig=plt.figure()
+plt.plot(datos[:,0],datos[:,1]);
+plt.ylabel('Temperatura Promedio [C]')
+plt.xlabel('Tiempo [s]')
+fig.savefig('promedio_2.jpg');
+
+datos=np.genfromtxt(sys.argv[8]);
+fig=plt.figure()
+plt.plot(datos[:,0],datos[:,1]);
+plt.ylabel('Temperatura Promedio [C]')
+plt.xlabel('Tiempo [s]')
+fig.savefig('promedio_3.jpg');
+
+
 
 
 
